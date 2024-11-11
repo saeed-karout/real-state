@@ -5,17 +5,17 @@
       <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-10 md:mb-14">What You'll Get</h2>
 
       <!-- Carousel Container -->
-      <div class="relative">
+      <div class="relative overflow-hidden">
         <!-- Slider Wrapper -->
         <div
-          class="flex transition-transform duration-500"
-          :style="{ transform: `translateX(-${currentIndex * 100}%)` }"
+          class="flex transition-transform duration-500 ease-in-out"
+          :style="{ transform: `translateX(-${currentIndex * (100 / itemsPerView)}%)` }"
         >
           <!-- Slide Item -->
-          <div v-for="(slide, index) in slides" :key="index" class="w-full flex-none md:w-1/3 p-4">
-            <div class="relative bg-cover bg-center h-[300px] md:h-[400px] rounded-lg shadow-lg overflow-hidden" :style="{ backgroundImage: `url(${slide.image})` }">
+          <div v-for="(slide, index) in slides" :key="index" class="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 p-4">
+            <div class="relative bg-cover bg-center h-[250px] sm:h-[300px] md:h-[400px] rounded-lg shadow-lg overflow-hidden" :style="{ backgroundImage: `url(${slide.image})` }">
               <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center rounded-lg">
-                <h3 class="text-white text-lg md:text-xl font-semibold text-center px-2">{{ slide.title }}</h3>
+                <h3 class="text-white text-base sm:text-lg md:text-xl font-semibold text-center px-4">{{ slide.title }}</h3>
               </div>
             </div>
           </div>
@@ -23,11 +23,11 @@
 
         <!-- Navigation Controls Below the Slider -->
         <div class="flex items-center justify-center mt-8 md:mt-16 space-x-4">
-          <button @click="prevSlide" class="hover:bg-opacity-80 transition p-2 md:p-4 rounded-full ">
-            <img src="../assets/icons/left.png" alt="Previous Slide" class="w-6 md:w-8" />
+          <button @click="prevSlide" class="hover:bg-opacity-80 transition p-2 md:p-4 rounded-full bg-gray-200">
+            <img src="../assets/icons/left.png" alt="Previous Slide" class="w-4 sm:w-6 md:w-8" />
           </button>
-          <button @click="nextSlide" class="hover:bg-opacity-80 transition p-2 md:p-4 rounded-full ">
-            <img src="../assets/icons/right.png" alt="Next Slide" class="w-6 md:w-8" />
+          <button @click="nextSlide" class="hover:bg-opacity-80 transition p-2 md:p-4 rounded-full bg-gray-200">
+            <img src="../assets/icons/right.png" alt="Next Slide" class="w-4 sm:w-6 md:w-8" />
           </button>
         </div>
       </div>
@@ -36,7 +36,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted, onUnmounted, watch } from 'vue';
 
 // Slides data
 const slides = [
@@ -52,18 +52,60 @@ const slides = [
     title: "Wellness and Relax Places",
     image: "/assets/images/wellness.jpg",
   },
+  {
+    title: "Modern Kitchens",
+    image: "/assets/images/kitchen.jpg",
+  },
+  {
+    title: "Cozy Bedrooms",
+    image: "/assets/images/bedroom.jpg",
+  },
 ];
 
 const currentIndex = ref(0);
-const slideCount = slides.length;
+const itemsPerView = ref(1);
+
+function updateItemsPerView() {
+  if (window.innerWidth >= 1024) {
+    itemsPerView.value = 3; // Large screens: 3 items
+  } else if (window.innerWidth >= 640) {
+    itemsPerView.value = 2; // Medium screens: 2 items
+  } else {
+    itemsPerView.value = 1; // Small screens: 1 item
+  }
+}
 
 function nextSlide() {
-  currentIndex.value = (currentIndex.value + 1) % slideCount;
+  if (currentIndex.value < Math.ceil(slides.length / itemsPerView.value) - 1) {
+    currentIndex.value++;
+  } else {
+    currentIndex.value = 0; // العودة إلى البداية
+  }
 }
 
 function prevSlide() {
-  currentIndex.value = (currentIndex.value - 1 + slideCount) % slideCount;
+  if (currentIndex.value > 0) {
+    currentIndex.value--;
+  } else {
+    currentIndex.value = Math.ceil(slides.length / itemsPerView.value) - 1; // الذهاب إلى النهاية
+  }
 }
+
+onMounted(() => {
+  updateItemsPerView();
+  window.addEventListener('resize', updateItemsPerView);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('resize', updateItemsPerView);
+});
+
+// مراقبة عدد العناصر المرئية لضبط `currentIndex` إذا تغير عدد العناصر المرئية فجأة
+watch(itemsPerView, (newVal, oldVal) => {
+  if (currentIndex.value >= Math.ceil(slides.length / newVal)) {
+    currentIndex.value = 0; // إعادة ضبط `currentIndex` لضمان المحاذاة الصحيحة
+  }
+});
 </script>
 
 <style scoped>

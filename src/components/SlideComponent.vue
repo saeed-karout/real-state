@@ -23,10 +23,10 @@
 
         <!-- Navigation Controls Below the Slider -->
         <div class="flex items-center justify-center mt-8 md:mt-16 space-x-4">
-          <button @click="prevSlide" class="hover:bg-opacity-80 transition p-2 md:p-4 rounded-full bg-gray-200">
+          <button @click="prevSlide" class="hover:bg-opacity-80 transition p-2 md:p-4 rounded-full ">
             <img src="../assets/icons/left.png" alt="Previous Slide" class="w-4 sm:w-6 md:w-8" />
           </button>
-          <button @click="nextSlide" class="hover:bg-opacity-80 transition p-2 md:p-4 rounded-full bg-gray-200">
+          <button @click="nextSlide" class="hover:bg-opacity-80 transition p-2 md:p-4 rounded-full ">
             <img src="../assets/icons/right.png" alt="Next Slide" class="w-4 sm:w-6 md:w-8" />
           </button>
         </div>

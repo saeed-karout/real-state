@@ -6,7 +6,7 @@
     <div :style="{ backgroundImage: `url(${heroImage})` }" class=" h-[80vh] w-full bg-cover bg-center">
 
 
-        <section class="bg-darkBlue relative top-[500px] right-96 p-8 rounded-lg  max-w-md mx-auto text-white space-y-6">
+        <section class="bg-darkBlue relative top-[40vh] right-96 p-8 rounded-lg  max-w-md mx-auto text-white space-y-6">
             <!-- Heading -->
             <div class="text-4xl font-bold">
                 <span class="mr-4">OUR</span>

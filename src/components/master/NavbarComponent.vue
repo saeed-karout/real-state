@@ -57,14 +57,14 @@
         </div>
 
         <!-- Contact Info Section with No Wrap -->
-        <div class="text-red-600 font-medium opacity-70 text-sm md:text-base hover:opacity-100 whitespace-nowrap mt-4 md:mt-0 md:block">
+        <div class="text-Raspberry font-medium opacity-70 text-sm md:text-base hover:opacity-100 whitespace-nowrap mt-4 md:mt-0 md:block">
           +1 668 54871 345
         </div>
       </div>
     </div>
 
     <!-- Mobile Contact Info Section (Only shown on mobile) -->
-    <div v-if="menuOpen" class="block md:hidden text-red-600 font-medium text-center mt-2 whitespace-nowrap">
+    <div v-if="menuOpen" class="block md:hidden text-Raspberry font-medium text-center mt-2 whitespace-nowrap">
       +1 668 54871 345
     </div>
   </nav>

@@ -1,8 +1,8 @@
 <template>
-  <section class=" py-12">
+  <section class="py-12">
     <div class="container mx-auto px-4">
       <!-- Section Title -->
-      <h2 class="text-4xl font-bold text-center text-gray-800 mb-14">What You'll Get</h2>
+      <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-10 md:mb-14">What You'll Get</h2>
 
       <!-- Carousel Container -->
       <div class="relative">
@@ -13,22 +13,21 @@
         >
           <!-- Slide Item -->
           <div v-for="(slide, index) in slides" :key="index" class="w-full flex-none md:w-1/3 p-4">
-            <div class="relative bg-cover bg-center h-[400px] rounded-lg shadow-lg overflow-hidden" :style="{ backgroundImage: `url(${slide.image})` }">
+            <div class="relative bg-cover bg-center h-[300px] md:h-[400px] rounded-lg shadow-lg overflow-hidden" :style="{ backgroundImage: `url(${slide.image})` }">
               <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center rounded-lg">
-                <h3 class="text-white text-xl font-semibold">{{ slide.title }}</h3>
+                <h3 class="text-white text-lg md:text-xl font-semibold text-center px-2">{{ slide.title }}</h3>
               </div>
             </div>
           </div>
         </div>
 
         <!-- Navigation Controls Below the Slider -->
-        <div class="flex items-center justify-center mt-16 space-x-4">
-          <button @click="prevSlide" class=" hover:bg-opacity-80 transition">
-           <img src="../assets/icons/left.png" alt="">
+        <div class="flex items-center justify-center mt-8 md:mt-16 space-x-4">
+          <button @click="prevSlide" class="hover:bg-opacity-80 transition p-2 md:p-4 rounded-full ">
+            <img src="../assets/icons/left.png" alt="Previous Slide" class="w-6 md:w-8" />
           </button>
-          <button @click="nextSlide" class=" hover:bg-opacity-80 transition">
-            <img src="../assets/icons/right.png" alt="">
-
+          <button @click="nextSlide" class="hover:bg-opacity-80 transition p-2 md:p-4 rounded-full ">
+            <img src="../assets/icons/right.png" alt="Next Slide" class="w-6 md:w-8" />
           </button>
         </div>
       </div>

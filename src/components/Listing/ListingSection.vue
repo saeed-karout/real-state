@@ -1,5 +1,5 @@
 <template>
-  <section class=" py-12 ">
+  <section class=" py-20 ">
     <div class="bg-Raspberry rounded-lg w-1/3 p-6  absolute right-0 mr-60">
       <h2 class="text-4xl font-extrabold text-white ">filters Bar</h2>
     </div>
